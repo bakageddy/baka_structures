@@ -23,6 +23,7 @@ list *init() {
     return temp;
 }
 
+
 node_t *new(int data) {
     node_t *temp = (node_t *) malloc(sizeof(node_t));
     if (!temp) exit(1);
@@ -42,7 +43,23 @@ void done(list *list) {
     free(list);
 }
 
-void traverse(list *list) {
+int get(list *list, const unsigned int index) {
+    if (index >= list -> len) {
+        done(list);
+        exit(1);
+    }
+    int i = 0;
+    node_t *temp = list -> head;
+    while (temp) {
+        if (i == index) {
+            return temp -> data;
+        }
+        i++;
+        temp = temp -> next;
+    }
+}
+
+void traverse(const list *list) {
     node_t *temp = list -> head;
     while (temp) {
         printf("%d ", temp -> data);
@@ -51,7 +68,7 @@ void traverse(list *list) {
     printf("\n");
 }
 
-void push(list *list, int elem) {
+void push(list *list, const int elem) {
     node_t *temp = list -> head, *n;
     if (temp == NULL) {
         list -> head = new(elem);
@@ -63,7 +80,7 @@ void push(list *list, int elem) {
     list -> len += 1;
 }
 
-void queue(list *list, int elem) {
+void queue(list *list, const int elem) {
     node_t *temp = list -> head, *n;
     if (temp == NULL) {
         list -> head = new(elem);
@@ -75,7 +92,7 @@ void queue(list *list, int elem) {
     list -> len += 1;
 }
 
-void insert(list *list, int index, int elem) {
+void insert(list *list, const int index, const int elem) {
     int i = 0;
     node_t *temp = list -> head, *n;
 
@@ -129,7 +146,7 @@ int dequeue(list *list) {
     return data;
 }
 
-void delete(list *list, int index) {
+void delete(list *list, const int index) {
     if (index >= list -> len) {
         done(list);
         exit(1);
@@ -164,7 +181,7 @@ void delete(list *list, int index) {
     list -> len -= 1;
 }
 
-int search(list *list, int elem) {
+int search(list *list, const int elem) {
     node_t *temp = list -> head;
     int i = 0;
     while (temp) {
