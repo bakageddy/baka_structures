@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../Experiment2/link.h"
+#include "link.h"
 
 int main() {
     int elem, opt;
