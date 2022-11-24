@@ -10,6 +10,7 @@ def search(list, elem):
         return search(list[mid + 1:], elem)
 
 
+# sort the list first
 hehe = list(map(int, input().strip().split()))
 elem = int(input("Enter the element: "))
 if not sorted(hehe):
