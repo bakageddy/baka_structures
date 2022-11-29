@@ -1,0 +1,22 @@
+#+TITLE: AVL Tree: Self Balancing Binary Search Tree
+#+AUTHOR: Dinesh Kumar G
+#+DATE: <2022-11-29 Tue>
+
+* AVL Tree:
+** Height:
+    Height of a node x in a tree is:
+    h(x) = max(h(x -> left), h(x -> right)) + 1
+    h(singleNode) = 0
+    h(emptyNode) = -1
+
+
+** Balance:
+    Balance Factor of a node x:
+    B(x) = H(l) - H(r)
+
+    We have to make sure that the tree must be balanced, by ensuring that the
+    | B(x)   | <= 1 |
+
+** Rotations:
+    We can rotate the nodes in a AVL Tree by maintaining the bst search property
+    and ensure that the search complexity is O(logN)
