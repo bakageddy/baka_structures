@@ -39,49 +39,54 @@ int height(AVL *root) {
 }
 
 int balance(AVL *root) {
+    if (root == NULL) return 0;
     return height(root -> left) - height(root -> right);
 }
 
 AVL *rotateLeft(AVL *root) {
-    return root;
+    AVL *y = root -> right;
+    AVL *B = y -> left;
+    y -> left = root;
+    root -> right = B;
+    return y;
 }
 
 AVL *rotateRight(AVL *root) {
-    return root;
+    AVL *y = root -> left;
+    AVL *B = y -> right;
+    y -> right = root;
+    root -> left = B;
+    return y;
 }
-
-AVL *leftRight(AVL *root) {
-    return root;
-}
-
-AVL *rightLeft(AVL *root) {
-    return root;
-}
-
 
 AVL *insert(AVL *root, int elem) {
-    int h, bal;
-    if (root == NULL) {
+    int bal;
+    if (root == NULL)
         return giveMeNode(elem);
-    } else if (root -> data >= elem) {
+    else if (root -> data > elem)
         root -> left = insert(root -> left, elem);
-    } else if (root -> data < elem) {
+    else if (root -> data < elem)
         root -> right = insert(root -> right, elem);
-    }
+    return root;
     bal = balance(root);
-    h = height(root);
-    if (bal != 2 || bal != -2) {
-        return root;
+    if (bal > 1) {
+        if (elem > root -> left -> data)
+            root -> left = rotateLeft(root);
+        return rotateRight(root);
     }
-    else {
-        if (bal == 2) {
-            if (root -> left)
-            return rotateRight(root);
-        }
-        if (bal == -2) {
-            return root;
-        }
+    else if (bal < -1) {
+        if (elem < root -> right -> data)
+            root -> right = rotateRight(root);
+        return rotateLeft(root);
     }
+    else return root;
+}
+
+void preorder(AVL *root) {
+    if (root == NULL) return;
+    printf("%d: %d\n", root -> data, balance(root));
+    preorder(root -> left);
+    preorder(root -> right);
 }
 
 #endif
